@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --background: 222 47% 6%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222 47% 9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 165 80% 45%;
+  --primary-foreground: 222 47% 6%;
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
+  --accent: 165 80% 45%;
+  --accent-foreground: 222 47% 6%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217 33% 20%;
+  --input: 217 33% 20%;
+  --ring: 165 80% 45%;
+  --radius: 0.75rem;
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-noto-bengali: 'Noto Sans Bengali', system-ui, sans-serif;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-inter);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Mesh gradient background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 0%, hsl(165 80% 20% / 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, hsl(240 80% 20% / 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, hsl(222 47% 6%) 0%, hsl(222 47% 4%) 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.bangla {
+  font-family: var(--font-noto-bengali);
+}
+
+/* Glass morphism card */
+.glass {
+  background: hsl(222 47% 9% / 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid hsl(var(--border));
+}
+
+/* Glow effects */
+.glow-green { box-shadow: 0 0 30px hsl(165 80% 45% / 0.3), 0 0 60px hsl(165 80% 45% / 0.1); }
+.glow-yellow { box-shadow: 0 0 30px hsl(48 96% 53% / 0.3), 0 0 60px hsl(48 96% 53% / 0.1); }
+.glow-red    { box-shadow: 0 0 30px hsl(0 72% 51% / 0.3), 0 0 60px hsl(0 72% 51% / 0.1); }
+
+/* Shimmer loading */
+.shimmer-bg {
+  background: linear-gradient(90deg, hsl(217 33% 17%) 25%, hsl(217 33% 22%) 50%, hsl(217 33% 17%) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: hsl(var(--muted)); border-radius: 100px; }
+::-webkit-scrollbar-thumb { background: hsl(var(--primary) / 0.5); border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--primary)); }
+
+/* Verdict borders */
+.verdict-safe   { border-color: #16a34a !important; }
+.verdict-caution { border-color: #ca8a04 !important; }
+.verdict-danger  { border-color: #dc2626 !important; }
+
+/* Pulse ring for mic */
+.recording-ring {
+  position: relative;
+}
+.recording-ring::before,
+.recording-ring::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid hsl(0 72% 51% / 0.7);
+  animation: pulse-ring 1.5s ease-in-out infinite;
+}
+.recording-ring::after {
+  inset: -8px;
+  animation-delay: 0.3s;
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Step indicator */
+.step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: hsl(var(--muted));
+  transition: all 0.3s ease;
+}
+.step-dot.active {
+  background: hsl(var(--primary));
+  box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+}
+.step-dot.done {
+  background: hsl(var(--primary) / 0.5);
+}
